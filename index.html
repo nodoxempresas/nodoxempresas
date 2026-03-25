@@ -1,12 +1,607 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NODOX Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NODOX | Celulares para empresas en México</title>
+  <meta name="description" content="Proveedor de celulares para empresas en México. Equipos nuevos, factura, entrega rápida y atención directa por WhatsApp." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0A1F44" />
+  <style>
+    :root {
+      --navy: #0A1F44;
+      --green: #00C853;
+      --green-dark: #00a844;
+      --white: #ffffff;
+      --soft: #f6f8fc;
+      --text: #1d2b45;
+      --muted: #667188;
+      --line: #e5ebf3;
+      --max: 1080px;
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.45;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.95);
+      border-bottom: 1px solid rgba(10,31,68,0.06);
+    }
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--navy);
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--navy), #12356b);
+      position: relative;
+    }
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      background: var(--green);
+      border-radius: 999px;
+    }
+    .brand-mark::before {
+      width: 10px;
+      height: 10px;
+      top: 7px;
+      right: 6px;
+    }
+    .brand-mark::after {
+      width: 13px;
+      height: 13px;
+      bottom: 6px;
+      left: 6px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      cursor: pointer;
+      font-weight: 800;
+      border-radius: 14px;
+      padding: 14px 20px;
+      transition: 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--green);
+      color: var(--white);
+      box-shadow: 0 8px 18px rgba(0,200,83,0.14);
+    }
+    .btn-primary:hover { background: var(--green-dark); }
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border: 1px solid rgba(10,31,68,0.12);
+    }
+    .hero {
+      padding: 64px 0 36px;
+      background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(10,31,68,0.06);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 0.84rem;
+    }
+    h1 {
+      margin: 0 0 16px;
+      color: var(--navy);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+    .hero-copy p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 650px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .micro-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(10,31,68,0.08);
+      background: #fff;
+      color: var(--muted);
+      font-size: 0.93rem;
+      font-weight: 700;
+    }
+    .hero-card,
+    .card,
+    .faq-item,
+    .cta-box {
+      background: #fff;
+      border: 1px solid rgba(10,31,68,0.08);
+      border-radius: var(--radius);
+    }
+    .hero-card {
+      padding: 24px;
+      box-shadow: 0 10px 24px rgba(10,31,68,0.05);
+    }
+    .hero-card h2 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 1.32rem;
+    }
+    .hero-card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+    .form-grid {
+      display: grid;
+      gap: 12px;
+    }
+    input, select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+    }
+    input:focus, select:focus {
+      border-color: rgba(10,31,68,0.24);
+      box-shadow: 0 0 0 4px rgba(10,31,68,0.05);
+    }
+    section { padding: 34px 0; }
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 20px;
+    }
+    .section-head h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .card { padding: 22px; }
+    .card h3 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: 1.14rem;
+    }
+    .card p, .card li { color: var(--muted); }
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(10,31,68,0.07), rgba(0,200,83,0.14));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+    .dark-band {
+      background: linear-gradient(135deg, var(--navy), #14366e);
+      color: #fff;
+      border-radius: 26px;
+      padding: 28px;
+    }
+    .dark-band h2,
+    .dark-band h3 { color: #fff; }
+    .dark-band p,
+    .dark-band li { color: rgba(255,255,255,0.84); }
+    .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .check-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .check {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+      border-radius: 999px;
+      background: rgba(0,200,83,0.14);
+      color: var(--green-dark);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      margin-top: 2px;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .step-number {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--navy);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .cta-box {
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      box-shadow: 0 8px 20px rgba(10,31,68,0.04);
+    }
+    .cta-box h2 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      line-height: 1.06;
+    }
+    .cta-box p { margin: 0; color: var(--muted); }
+    .faq {
+      display: grid;
+      gap: 12px;
+    }
+    .faq-item {
+      padding: 18px 18px;
+    }
+    .faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+    footer {
+      padding: 30px 0 50px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+    .footer-row {
+      border-top: 1px solid rgba(10,31,68,0.08);
+      padding-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    @media (max-width: 960px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .steps,
+      .cta-box { grid-template-columns: 1fr; }
+      .cta-box { display: grid; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    @media (max-width: 760px) {
+      .hero { padding-top: 44px; }
+      .nav .btn { display: none; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
 </head>
 <body>
-  <h1>NODOX funciona</h1>
-  <p>Si ves esto renderizado, GitHub Pages ya está bien.</p>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#inicio" class="brand" aria-label="NODOX inicio">
+        <span class="brand-mark"></span>
+        <span>NODOX</span>
+      </a>
+      <a class="btn btn-primary" href="https://wa.me/525658333625?text=Hola,%20quiero%20cotizar%20celulares%20para%20mi%20empresa.%20Me%20interesa%20conocer%20opciones,%20precios%20y%20disponibilidad." target="_blank" rel="noopener noreferrer">Cotizar por WhatsApp</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Proveedor de celulares para empresas</span>
+          <h1>Celulares para empresas en México</h1>
+          <p>Equipos nuevos, factura inmediata, entrega rápida y atención directa para empresas que necesitan operar sin interrupciones.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://wa.me/525658333625?text=Hola,%20quiero%20cotizar%20celulares%20para%20mi%20empresa.%20Me%20interesa%20conocer%20opciones,%20precios%20y%20disponibilidad." target="_blank" rel="noopener noreferrer">Solicitar cotización</a>
+            <a class="btn btn-outline" href="#proceso">Cómo trabajamos</a>
+          </div>
+          <div class="micro-proof">
+            <span class="pill">Equipos nuevos</span>
+            <span class="pill">Factura disponible</span>
+            <span class="pill">Entrega rápida</span>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h2>Cotiza en minutos</h2>
+          <p>Déjanos tus datos y te llevamos directo a WhatsApp con una solicitud mejor filtrada.</p>
+          <form class="form-grid" onsubmit="return goWhatsApp(event)">
+            <select id="cantidad" required>
+              <option value="" selected disabled>¿Cuántos equipos necesitas?</option>
+              <option>1 a 5</option>
+              <option>5 a 20</option>
+              <option>20 o más</option>
+            </select>
+            <select id="uso" required>
+              <option value="" selected disabled>¿Para qué uso?</option>
+              <option>Ventas</option>
+              <option>Operación</option>
+              <option>Administrativo</option>
+              <option>Logística</option>
+            </select>
+            <select id="presupuesto" required>
+              <option value="" selected disabled>Presupuesto por equipo</option>
+              <option>$1,000 a $2,000</option>
+              <option>$2,000 a $4,000</option>
+              <option>$4,000 o más</option>
+            </select>
+            <input id="nombre" type="text" placeholder="Nombre" required />
+            <input id="empresa" type="text" placeholder="Empresa" required />
+            <button class="btn btn-primary" type="submit">Continuar a WhatsApp</button>
+          </form>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="container grid-3">
+        <article class="card">
+          <div class="card-icon">01</div>
+          <h3>Venta de celulares al mayoreo</h3>
+          <p>Equipos nuevos para empresas que necesitan comprar por volumen con atención directa y cotización rápida.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon">02</div>
+          <h3>Reparación y soporte</h3>
+          <p>Apoyo para mantener tus equipos funcionando y reducir interrupciones en tu operación.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon">03</div>
+          <h3>Monitoreo y gestión</h3>
+          <p>Te ayudamos a tener mejor control sobre los equipos que usa tu empresa.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="container grid-2">
+        <div class="card">
+          <div class="section-head">
+            <h2>Un proveedor confiable para tu operación</h2>
+            <p>Una empresa no necesita solo comprar celulares. Necesita disponibilidad, soporte y respuesta rápida.</p>
+          </div>
+          <ul class="check-list">
+            <li><span class="check">✓</span><div>Equipos nuevos y garantizados</div></li>
+            <li><span class="check">✓</span><div>Factura inmediata</div></li>
+            <li><span class="check">✓</span><div>Atención enfocada en empresas</div></li>
+            <li><span class="check">✓</span><div>Seguimiento posterior a la compra</div></li>
+          </ul>
+        </div>
+        <div class="dark-band">
+          <div class="section-head">
+            <h2>Tu operación necesita más que una tienda en línea</h2>
+            <p>Te ayudamos a encontrar el modelo correcto según presupuesto, uso y volumen.</p>
+          </div>
+          <ul class="check-list">
+            <li><span class="check" style="background: rgba(255,255,255,0.18); color: #fff;">•</span><div>Menos fricción en cotización y compra</div></li>
+            <li><span class="check" style="background: rgba(255,255,255,0.18); color: #fff;">•</span><div>Mejor decisión por uso real</div></li>
+            <li><span class="check" style="background: rgba(255,255,255,0.18); color: #fff;">•</span><div>Más continuidad con soporte y reparación</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Soluciones según tu operación</h2>
+          <p>Te recomendamos equipos según el tipo de trabajo y el nivel de exigencia de tu empresa.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Equipos operativos</h3>
+            <p>Para tareas básicas, personal de campo y operación diaria.</p>
+          </article>
+          <article class="card">
+            <h3>Equipos para ventas</h3>
+            <p>Buen rendimiento, batería y estabilidad para equipos comerciales.</p>
+          </article>
+          <article class="card">
+            <h3>Equipos ejecutivos</h3>
+            <p>Mayor desempeño para perfiles clave y equipos estratégicos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proceso">
+      <div class="container">
+        <div class="section-head">
+          <h2>Así trabajamos</h2>
+          <p>Un proceso simple para cotizar y avanzar rápido.</p>
+        </div>
+        <div class="steps">
+          <article class="card">
+            <div class="step-number">1</div>
+            <h3>Nos compartes tu necesidad</h3>
+            <p>Número de equipos, presupuesto y tipo de uso.</p>
+          </article>
+          <article class="card">
+            <div class="step-number">2</div>
+            <h3>Te recomendamos opciones</h3>
+            <p>Recibes una propuesta clara con alternativas.</p>
+          </article>
+          <article class="card">
+            <div class="step-number">3</div>
+            <h3>Confirmamos disponibilidad</h3>
+            <p>Revisamos factura, tiempos y entrega.</p>
+          </article>
+          <article class="card">
+            <div class="step-number">4</div>
+            <h3>Tu empresa sigue operando</h3>
+            <p>Con equipos listos y apoyo posterior.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <h2>Cotiza hoy con atención directa</h2>
+            <p>Si tu empresa necesita equipos nuevos, soporte o una solución móvil más ordenada, estamos listos para ayudarte.</p>
+          </div>
+          <a class="btn btn-primary" href="https://wa.me/525658333625?text=Hola,%20quiero%20cotizar%20celulares%20para%20mi%20empresa.%20Me%20interesa%20conocer%20opciones,%20precios%20y%20disponibilidad." target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Preguntas frecuentes</h2>
+          <p>Lo básico que una empresa quiere saber antes de avanzar.</p>
+        </div>
+        <div class="faq">
+          <details class="faq-item">
+            <summary>¿Los equipos son nuevos?</summary>
+            <p>Sí, trabajamos con equipos nuevos.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Pueden facturar?</summary>
+            <p>Sí, contamos con factura.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Venden por volumen?</summary>
+            <p>Sí, atendemos compras empresariales y ventas al mayoreo.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿También apoyan con reparación?</summary>
+            <p>Sí, podemos apoyarte con reparación y seguimiento según el caso.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>
+        <strong style="color: var(--navy);">NODOX</strong><br>
+        Soluciones móviles para empresas en México
+      </div>
+      <div>
+        contacto@nodox.com.mx<br>
+        WhatsApp: +52 56 5833 3625
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function goWhatsApp(event) {
+      event.preventDefault();
+      const nombre = document.getElementById('nombre').value.trim();
+      const empresa = document.getElementById('empresa').value.trim();
+      const cantidad = document.getElementById('cantidad').value;
+      const uso = document.getElementById('uso').value;
+      const presupuesto = document.getElementById('presupuesto').value;
+      const mensaje =
+        'Hola, quiero cotizar celulares para mi empresa.%0A%0A' +
+        'Nombre: ' + encodeURIComponent(nombre) + '%0A' +
+        'Empresa: ' + encodeURIComponent(empresa) + '%0A' +
+        'Cantidad de equipos: ' + encodeURIComponent(cantidad) + '%0A' +
+        'Uso: ' + encodeURIComponent(uso) + '%0A' +
+        'Presupuesto por equipo: ' + encodeURIComponent(presupuesto) + '%0A%0A' +
+        'Me interesa conocer opciones, precios y disponibilidad.';
+      const url = 'https://wa.me/525658333625?text=' + mensaje;
+      window.open(url, '_blank');
+      return false;
+    }
+  </script>
 </body>
 </html>
