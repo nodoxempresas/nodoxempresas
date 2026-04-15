@@ -27,7 +27,12 @@
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
@@ -41,7 +46,16 @@
     }
 
     a { color: inherit; text-decoration: none; }
-    .container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    img, svg, video, canvas {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      max-width: 100%;
+      margin: 0 auto;
+    }
     .glass {
       background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
       border: 1px solid var(--line);
@@ -65,13 +79,14 @@
       position: sticky;
       top: 0;
       z-index: 30;
-      background: rgba(7,17,31,0.78);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(5,12,22,0.84);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 12px 34px rgba(0,0,0,0.22);
     }
     .nav {
-      min-height: 76px;
+      min-height: 84px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -80,18 +95,35 @@
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       font-weight: 800;
       font-size: 1.22rem;
       letter-spacing: 0.02em;
     }
+    .brand-shell {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
     .brand-logo {
-      height: 42px;
+      height: 50px;
       width: auto;
       display: block;
+      filter: drop-shadow(0 4px 14px rgba(255,255,255,0.08));
     }
     .brand-wordmark {
-      display: none;
+      display: inline-block;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.92;
     }
     .nav-links {
       display: flex;
@@ -100,7 +132,25 @@
       font-size: 0.95rem;
       font-weight: 700;
     }
+    .nav-links a {
+      position: relative;
+      padding: 8px 0;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.2s ease;
+      opacity: 0.8;
+    }
     .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { transform: scaleX(1); }
 
     .btn {
       display: inline-flex;
@@ -114,6 +164,7 @@
       transition: 0.2s ease;
       cursor: pointer;
       white-space: nowrap;
+      max-width: 100%;
     }
     .btn-primary {
       color: #041018;
@@ -132,6 +183,7 @@
       color: #04160f;
       box-shadow: 0 10px 26px rgba(0,208,132,0.18);
     }
+    .btn-whatsapp:hover { transform: translateY(-1px); box-shadow: 0 14px 32px rgba(0,208,132,0.22); }
 
     .hero {
       position: relative;
@@ -496,12 +548,106 @@
       .hero-copy div[style*="grid-template-columns:repeat(5,minmax(0,1fr))"] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
     }
     @media (max-width: 760px) {
-      .hero { padding-top: 46px; }
-      .hero-actions, .cta-actions { flex-direction: column; }
-      .btn { width: 100%; }
+      .hero-grid, .grid-3, .grid-2, .steps, .stats-grid, .cta-box {
+        min-width: 0;
+      }
+      .card, .hero-card, .dark-band, .stat, .device-row, .trust-pill, .anchor-pill, .metric-panel, .dashboard, .hero-copy {
+        min-width: 0;
+        max-width: 100%;
+      }
+      .anchor-pill, .trust-pill {
+        white-space: normal;
+        text-align: center;
+      }
+      .btn {
+        white-space: normal;
+      }
+      .hero { padding-top: 42px; }
+      .hero-grid { gap: 22px; }
+      h1 {
+        font-size: clamp(2.1rem, 9vw, 2.8rem);
+        line-height: 1.04;
+        max-width: 100%;
+      }
+      .hero-copy p {
+        font-size: 1rem;
+        margin-bottom: 18px;
+      }
+      .hero-actions, .cta-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .btn {
+        width: 100%;
+        min-height: 54px;
+        padding: 16px 18px;
+        font-size: 1rem;
+      }
       .nav > .btn { display: none; }
       .trust-bar { grid-template-columns: 1fr; }
-      .dashboard { min-height: auto; }
+      .trust-pill {
+        font-size: 0.92rem;
+        padding: 12px 14px;
+      }
+      .dashboard { min-height: auto; padding: 18px; }
+      .hero-card { padding: 16px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .stat { padding: 14px; }
+      .stat strong { font-size: 1.35rem; }
+      .metric-panel { padding: 14px; }
+      .device-row {
+        padding: 12px 14px;
+        font-size: 0.88rem;
+      }
+      .section-head h2 {
+        font-size: clamp(1.6rem, 7vw, 2.1rem);
+        line-height: 1.08;
+      }
+      .section-head p {
+        font-size: 0.98rem;
+      }
+      .card {
+        padding: 18px;
+      }
+      .card h3 {
+        font-size: 1.08rem;
+      }
+      .brand-shell {
+        padding: 8px 12px;
+        border-radius: 16px;
+      }
+      .brand-logo { height: 42px; }
+      .brand-wordmark {
+        font-size: 0.82rem;
+        letter-spacing: 0.14em;
+      }
+      .footer-row {
+        align-items: flex-start;
+      }
+    }
+    .mobile-wa {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      z-index: 60;
+      display: none;
+    }
+    .mobile-wa a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      border-radius: 18px;
+      font-weight: 900;
+      color: #04160f;
+      background: linear-gradient(90deg, var(--green), #3ef1ad);
+      box-shadow: 0 14px 30px rgba(0,208,132,0.24);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    @media (max-width: 760px) {
+      .mobile-wa { display: block; }
+      body { padding-bottom: 82px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -520,8 +666,10 @@
   <header class="topbar">
     <div class="container nav">
       <a href="#inicio" class="brand" aria-label="NODOX inicio">
-        <img src="nodox-empresas-logo.svg" alt="NODOX" class="brand-logo">
-        <span class="brand-wordmark">NODOX</span>
+        <span class="brand-shell">
+          <img src="nodox-empresas-logo-fondo-blanco-cuadrado(1).svg" alt="NODOX" class="brand-logo">
+          <span class="brand-wordmark">NODOX</span>
+        </span>
       </a>
       <nav class="nav-links">
         <a href="#soluciones">Soluciones</a>
@@ -539,29 +687,28 @@
       <div class="container hero-grid">
         <div class="hero-copy">
           <span class="eyebrow">Infraestructura móvil inteligente para empresas</span>
-          <h1>Convierte tu operación en un <span class="gradient-text">sistema móvil inteligente</span></h1>
-          <p>NODOX ayuda a empresas a equipar, controlar y escalar su operación móvil con equipos nuevos, soporte especializado, monitoreo y una experiencia más rápida que un proveedor tradicional.</p>
+          <h1>Compra mejor. <span class="gradient-text">Controla tu flota.</span> Opera sin fricción.</h1>
+          <p>NODOX ayuda a empresas a comprar equipos móviles por volumen con más velocidad, mejor criterio y seguimiento real. Menos tiempo perdido, más continuidad operativa.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://wa.me/525658333625?text=Hola,%20quiero%20cotizar%20celulares%20para%20mi%20empresa.%20Me%20interesa%20conocer%20opciones,%20precios%20y%20disponibilidad." target="_blank" rel="noopener noreferrer">Cotizar por WhatsApp</a>
-            <a class="btn btn-secondary" href="#soluciones">Ver soluciones</a>
+            <a class="btn btn-primary" href="https://wa.me/525658333625?text=Hola,%20quiero%20cotizar%20celulares%20para%20mi%20empresa.%20Me%20interesa%20conocer%20opciones,%20precios%20y%20disponibilidad." target="_blank" rel="noopener noreferrer">Cotizar flota</a>
+            <a class="btn btn-secondary" href="#productos">Ver modelos</a>
           </div>
           <div class="trust-bar">
-            <div class="trust-pill">Planes desde $1,800 MXN por equipo</div>
-            <div class="trust-pill">Entrega inmediata y factura</div>
-            <div class="trust-pill">Atención para empresas y flotas</div>
+            <div class="trust-pill">Compra mínima: 10 equipos</div>
+            <div class="trust-pill">Factura disponible y entrega inmediata</div>
+            <div class="trust-pill">CDMX y envíos al resto de México</div>
           </div>
 
-          <div style="margin-top:26px;">
-            <div style="font-size:0.8rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); font-weight:800; margin-bottom:12px;">Marcas disponibles</div>
-            <div style="display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; max-width:760px;">
-              <div class="glass" style="border-radius:16px; padding:14px 10px; text-align:center; font-weight:800; color:#ffffff;">Apple</div>
-              <div class="glass" style="border-radius:16px; padding:14px 10px; text-align:center; font-weight:800; color:#ffffff;">Samsung</div>
-              <div class="glass" style="border-radius:16px; padding:14px 10px; text-align:center; font-weight:800; color:#ffffff;">Xiaomi</div>
-              <div class="glass" style="border-radius:16px; padding:14px 10px; text-align:center; font-weight:800; color:#ffffff;">Motorola</div>
-              <div class="glass" style="border-radius:16px; padding:14px 10px; text-align:center; font-weight:800; color:#ffffff;">OPPO</div>
-            </div>
+          <div style="margin-top:18px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+            <span style="font-size:0.78rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); font-weight:800;">Marcas disponibles</span>
+            <span class="anchor-pill" style="margin-top:0; background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); color:#ffffff;">Apple</span>
+            <span class="anchor-pill" style="margin-top:0; background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); color:#ffffff;">Samsung</span>
+            <span class="anchor-pill" style="margin-top:0; background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); color:#ffffff;">Xiaomi</span>
+            <span class="anchor-pill" style="margin-top:0; background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); color:#ffffff;">Motorola</span>
+            <span class="anchor-pill" style="margin-top:0; background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); color:#ffffff;">OPPO</span>
           </div>
-        </div>
+
+          </div>
 
         <aside class="hero-card glass">
           <div class="dashboard">
@@ -575,35 +722,35 @@
 
             <div class="stats-grid">
               <div class="stat">
-                <strong>+32%</strong>
-                <span>Eficiencia operativa</span>
-              </div>
-              <div class="stat">
-                <strong>-18%</strong>
-                <span>Menor costo móvil</span>
-              </div>
-              <div class="stat">
-                <strong>99.9%</strong>
-                <span>Disponibilidad</span>
+                <strong>146</strong>
+                <span>Equipos activos</span>
               </div>
               <div class="stat">
                 <strong>24/48h</strong>
-                <span>Tiempo de respuesta</span>
+                <span>Tiempo de entrega</span>
+              </div>
+              <div class="stat">
+                <strong>12 días</strong>
+                <span>Reposición promedio</span>
+              </div>
+              <div class="stat">
+                <strong>4 marcas</strong>
+                <span>Disponibilidad continua</span>
               </div>
             </div>
 
             <div class="metric-panel">
-              <div class="metric-row"><span>Salud de dispositivos</span><span>78%</span></div>
+              <div class="metric-row"><span>Equipos en campo</span><span>78%</span></div>
               <div class="bar"><div class="bar-fill" style="width:78%"></div></div>
               <div class="metric-row"><span>Cobertura operativa</span><span>92%</span></div>
               <div class="bar"><div class="bar-fill" style="width:92%"></div></div>
-              <div class="metric-row"><span>Flota activa</span><span>146 equipos</span></div>
+              <div class="metric-row"><span>Tickets resueltos</span><span>31 este mes</span></div>
             </div>
 
             <div class="device-stack">
-              <div class="device-row"><span>Samsung A36</span><strong>Ventas</strong></div>
-              <div class="device-row"><span>Honor X8c</span><strong>Operación</strong></div>
-              <div class="device-row"><span>Redmi Note 14</span><strong>Supervisión</strong></div>
+              <div class="device-row"><span>Samsung A36</span><strong>Operación</strong></div>
+              <div class="device-row"><span>Honor X8c</span><strong>Ventas</strong></div>
+              <div class="device-row"><span>Galaxy Ultra / iPhone Pro Max</span><strong>Ejecutivos</strong></div>
             </div>
           </div>
         </aside>
@@ -702,7 +849,8 @@
           <p>Una muestra rápida de equipos que funcionan bien para empresa según perfil de uso. Los precios son referenciales y pueden variar según volumen, disponibilidad y configuración.</p>
         </div>
         <div class="grid-3">
-          <article class="card glass">
+          <article class="card glass" style="border-color:rgba(0,208,132,0.20); box-shadow:0 18px 50px rgba(0,208,132,0.10);">
+            <div style="display:inline-flex; margin-bottom:12px; padding:7px 12px; border-radius:999px; background:rgba(0,208,132,0.12); border:1px solid rgba(0,208,132,0.18); color:#dffef1; font-size:0.78rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase;">Más solicitado</div>
             <div class="card-icon">A</div>
             <h3>Operación diaria</h3>
             <p style="margin-bottom:14px;"><strong style="color:#ffffff;">Samsung A36</strong><br>Buen equilibrio entre rendimiento, batería y durabilidad para operación continua.</p>
@@ -713,6 +861,7 @@
             
           </article>
           <article class="card glass">
+            <div style="display:inline-flex; margin-bottom:12px; padding:7px 12px; border-radius:999px; background:rgba(69,243,255,0.10); border:1px solid rgba(69,243,255,0.16); color:#d7fbff; font-size:0.78rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase;">Mejor equilibrio</div>
             <div class="card-icon">B</div>
             <h3>Ventas y atención</h3>
             <p style="margin-bottom:14px;"><strong style="color:#ffffff;">Honor X8c</strong><br>Una opción sólida para equipos comerciales que necesitan imagen, fluidez y buena autonomía.</p>
@@ -732,7 +881,8 @@
             </ul>
             
           </article>
-          <article class="card glass">
+          <article class="card glass" style="border-color:rgba(69,243,255,0.18); box-shadow:0 18px 50px rgba(69,243,255,0.08);">
+            <div style="display:inline-flex; margin-bottom:12px; padding:7px 12px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#ffffff; font-size:0.78rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase;">Opción premium</div>
             <div class="card-icon">D</div>
             <h3>Alta gama / Ejecutivos</h3>
             <p style="margin-bottom:14px;"><strong style="color:#ffffff;">Samsung S26 Ultra / iPhone 17 Pro Max</strong><br>Equipos premium para dirección, socios y perfiles clave donde la percepción, potencia y status importan.</p>
@@ -844,15 +994,23 @@
 
   <footer>
     <div class="container footer-row">
-      <div>
-        <strong style="color:#ffffff;">NODOX</strong><br>
-        Infraestructura móvil inteligente para empresas en México
+      <div style="display:flex; align-items:center; gap:14px;">
+        <img src="nodox-empresas-logo-fondo-blanco-cuadrado(1).svg" alt="NODOX" style="height:40px; width:auto; display:block;">
+        <div>
+          <strong style="color:#ffffff; letter-spacing:0.12em; text-transform:uppercase; font-size:0.82rem;">NODOX</strong><br>
+          Proveedor de celulares y operación móvil para empresas en México
+        </div>
       </div>
       <div>
         contacto@nodox.com.mx<br>
-        WhatsApp: +52 56 5833 3625
+        WhatsApp: +52 56 5833 3625<br>
+        Atención a empresas · Compras desde 10 equipos
       </div>
     </div>
   </footer>
+
+  <div class="mobile-wa">
+    <a href="https://wa.me/525658333625?text=Hola,%20quiero%20cotizar%20celulares%20para%20mi%20empresa.%20Me%20interesa%20conocer%20opciones,%20precios%20y%20disponibilidad." target="_blank" rel="noopener noreferrer">WhatsApp directo</a>
+  </div>
 </body>
 </html>
