@@ -85,34 +85,13 @@
       font-size: 1.22rem;
       letter-spacing: 0.02em;
     }
-    .brand-mark {
-      width: 42px;
+    .brand-logo {
       height: 42px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(69,243,255,0.18), rgba(255,255,255,0.08));
-      border: 1px solid rgba(69,243,255,0.24);
-      position: relative;
-      box-shadow: 0 0 30px rgba(69,243,255,0.12);
+      width: auto;
+      display: block;
     }
-    .brand-mark::before,
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      background: var(--cyan);
-    }
-    .brand-mark::before {
-      width: 10px;
-      height: 10px;
-      top: 7px;
-      right: 7px;
-    }
-    .brand-mark::after {
-      width: 14px;
-      height: 14px;
-      left: 7px;
-      bottom: 7px;
-      background: var(--green);
+    .brand-wordmark {
+      display: none;
     }
     .nav-links {
       display: flex;
@@ -541,12 +520,13 @@
   <header class="topbar">
     <div class="container nav">
       <a href="#inicio" class="brand" aria-label="NODOX inicio">
-        <span class="brand-mark"></span>
-        <span>NODOX</span>
+        <img src="nodox-empresas-logo-fondo-blanco-cuadrado(1).svg" alt="NODOX" class="brand-logo">
+        <span class="brand-wordmark">NODOX</span>
       </a>
       <nav class="nav-links">
         <a href="#soluciones">Soluciones</a>
         <a href="#beneficios">Beneficios</a>
+        <a href="#productos">Productos</a>
         <a href="#proceso">Proceso</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -711,6 +691,79 @@
             <h3>Equipos ejecutivos</h3>
             <p>Mayor desempeño para perfiles clave, mandos medios y roles estratégicos.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="productos">
+      <div class="container">
+        <div class="section-head">
+          <h2>Modelos recomendados y referencia de inversión</h2>
+          <p>Una muestra rápida de equipos que funcionan bien para empresa según perfil de uso. Los precios son referenciales y pueden variar según volumen, disponibilidad y configuración.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card glass">
+            <div class="card-icon">A</div>
+            <h3>Operación diaria</h3>
+            <p style="margin-bottom:14px;"><strong style="color:#ffffff;">Samsung A36</strong><br>Buen equilibrio entre rendimiento, batería y durabilidad para operación continua.</p>
+            <ul class="muted-list" style="margin-bottom:18px;">
+              <li><span class="check">✓</span><div>Ideal para campo, logística y supervisión</div></li>
+              <li><span class="check">✓</span><div>Buen costo-beneficio para compras repetidas</div></li>
+            </ul>
+            
+          </article>
+          <article class="card glass">
+            <div class="card-icon">B</div>
+            <h3>Ventas y atención</h3>
+            <p style="margin-bottom:14px;"><strong style="color:#ffffff;">Honor X8c</strong><br>Una opción sólida para equipos comerciales que necesitan imagen, fluidez y buena autonomía.</p>
+            <ul class="muted-list" style="margin-bottom:18px;">
+              <li><span class="check">✓</span><div>Recomendado para fuerza de ventas y atención al cliente</div></li>
+              <li><span class="check">✓</span><div>Buen balance entre presentación y costo</div></li>
+            </ul>
+            
+          </article>
+          <article class="card glass">
+            <div class="card-icon">C</div>
+            <h3>Mayor exigencia</h3>
+            <p style="margin-bottom:14px;"><strong style="color:#ffffff;">Honor Magic 7 Lite</strong><br>Para roles clave que requieren mejor experiencia, mejor batería y una percepción más premium.</p>
+            <ul class="muted-list" style="margin-bottom:18px;">
+              <li><span class="check">✓</span><div>Ideal para perfiles estratégicos o ejecutivos</div></li>
+              <li><span class="check">✓</span><div>Mayor valor percibido para equipos importantes</div></li>
+            </ul>
+            
+          </article>
+          <article class="card glass">
+            <div class="card-icon">D</div>
+            <h3>Alta gama / Ejecutivos</h3>
+            <p style="margin-bottom:14px;"><strong style="color:#ffffff;">Samsung S26 Ultra / iPhone 17 Pro Max</strong><br>Equipos premium para dirección, socios y perfiles clave donde la percepción, potencia y status importan.</p>
+            <ul class="muted-list" style="margin-bottom:18px;">
+              <li><span class="check">✓</span><div>Máximo rendimiento y durabilidad</div></li>
+              <li><span class="check">✓</span><div>Imagen premium para roles estratégicos</div></li>
+            </ul>
+          </article>
+        </div>
+        <div class="dark-band" style="margin-top:18px;">
+          <div class="section-head" style="margin-bottom:14px;">
+            <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem);">Escalas de precio por tipo de compra</h2>
+            <p>El ticket final cambia por marca, modelo, volumen y urgencia. Esta estructura ayuda a que el comprador entienda desde dónde empieza la conversación.</p>
+          </div>
+          <div class="grid-3">
+            <div class="card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); box-shadow:none;">
+              <h3>Compra inicial</h3>
+              <p>10 a 20 equipos</p>
+              <div class="pricing-anchor"><span class="anchor-pill">Precio base</span></div>
+            </div>
+            <div class="card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); box-shadow:none;">
+              <h3>Compra empresarial</h3>
+              <p>20 a 50 equipos</p>
+              <div class="pricing-anchor"><span class="anchor-pill">Mejor precio por volumen</span></div>
+            </div>
+            <div class="card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); box-shadow:none;">
+              <h3>Flota y renovación</h3>
+              <p>50+ equipos</p>
+              <div class="pricing-anchor"><span class="anchor-pill">Cotización especial</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
